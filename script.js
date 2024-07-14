@@ -7,6 +7,8 @@ const feelsLike = document.getElementById("feels-like");
 const humidity = document.getElementById("humidity");
 const windSpeed = document.getElementById("wind-speed");
 const forecastDays = document.querySelector(".forecast-days");
+const currentWeatherDiv = document.querySelector(".current-weather");
+const forecastDiv = document.querySelector(".forecast");
 
 const apiKey = "c461518e8d2ff3d0e97f1a492f964098";
 
@@ -37,6 +39,7 @@ function displayCurrentWeather(data) {
   feelsLike.textContent = `Feels like: ${data.main.feels_like}°C`;
   humidity.textContent = `Humidity: ${data.main.humidity}%`;
   windSpeed.textContent = `Wind speed: ${data.wind.speed} m/s`;
+  currentWeatherDiv.classList.remove("hidden");
 }
 
 function fetchForecastData(location) {
@@ -85,23 +88,32 @@ function displayForecast(forecastData) {
     const morningElement = document.createElement("div");
     const eveningElement = document.createElement("div");
     const nightElement = document.createElement("div");
+    const morningIconElement = document.createElement("img");
+    const eveningIconElement = document.createElement("img");
+    const nightIconElement = document.createElement("img");
 
     dateElement.textContent = date;
 
     if (forecastByDay[date].morning) {
       morningElement.textContent = `Morning: ${forecastByDay[date].morning.weather[0].description}, ${forecastByDay[date].morning.main.temp}°C`;
+      morningIconElement.src = `http://openweathermap.org/img/w/${forecastByDay[date].morning.weather[0].icon}.png`;
+      morningElement.prepend(morningIconElement);
     } else {
       morningElement.textContent = "Morning: N/A";
     }
 
     if (forecastByDay[date].evening) {
       eveningElement.textContent = `Evening: ${forecastByDay[date].evening.weather[0].description}, ${forecastByDay[date].evening.main.temp}°C`;
+      eveningIconElement.src = `http://openweathermap.org/img/w/${forecastByDay[date].evening.weather[0].icon}.png`;
+      eveningElement.prepend(eveningIconElement);
     } else {
       eveningElement.textContent = "Evening: N/A";
     }
 
     if (forecastByDay[date].night) {
       nightElement.textContent = `Night: ${forecastByDay[date].night.weather[0].description}, ${forecastByDay[date].night.main.temp}°C`;
+      nightIconElement.src = `http://openweathermap.org/img/w/${forecastByDay[date].night.weather[0].icon}.png`;
+      nightElement.prepend(nightIconElement);
     } else {
       nightElement.textContent = "Night: N/A";
     }
@@ -112,4 +124,5 @@ function displayForecast(forecastData) {
     dayElement.appendChild(nightElement);
     forecastDays.appendChild(dayElement);
   });
+  forecastDiv.classList.remove("hidden");
 }

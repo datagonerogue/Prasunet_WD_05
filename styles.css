@@ -73,6 +73,10 @@ header {
   margin-bottom: 20px;
 }
 
+.current-weather.hidden,
+.forecast.hidden {
+  display: none;
+}
 .current-weather h2 {
   font-size: 36px;
   margin-bottom: 10px;
