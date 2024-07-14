@@ -10,21 +10,21 @@ body {
   font-family: Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  color: #333;
-  background-color: #f5f5f5;
+  color: #ffd0ec;
+  background-color: #81689d;
 }
 
 a {
   text-decoration: none;
-  color: #007bff;
 }
 
 /* Header styles */
 header {
-  background-color: #007bff;
-  color: #fff;
+  background-color: #1f2544;
   padding: 20px;
   text-align: center;
+  margin: 20px;
+  border-radius: 12px;
 }
 
 /* Search container styles */
@@ -36,19 +36,22 @@ header {
 
 #location-input {
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 2px solid #ffd0ec;
+  border-radius: 12px;
+  color: #ffd0ec;
+  background-color: #ffffff00;
   font-size: 16px;
   width: 300px;
   margin-right: 10px;
 }
 
 #search-btn {
-  background-color: #007bff;
-  color: #fff;
+  background-color: #474f7a;
   border: none;
+  color: #ffd0ec;
+
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 12px;
   font-size: 16px;
   cursor: pointer;
 }
@@ -58,13 +61,13 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 40px;
+  margin: 20px;
 }
 
 .current-weather {
-  background-color: #fff;
+  background-color: #474f7a;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 12px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
   margin-bottom: 20px;
@@ -80,9 +83,9 @@ header {
 }
 
 .forecast {
-  background-color: #fff;
+  background-color: #1f2544;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 12px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
@@ -99,17 +102,19 @@ header {
 }
 
 .forecast-days > div {
-  background-color: #f5f5f5;
+  background-color: #474f7a;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 12px;
   margin: 10px;
   width: 150px;
 }
 
 /* Footer styles */
 footer {
-  background-color: #007bff;
-  color: #fff;
-  padding: 20px;
+  background-color: #1f2544;
+  color: #ffd0ec;
+  padding: 10px;
   text-align: center;
+  display: none;
+  bottom: 0;
 }
