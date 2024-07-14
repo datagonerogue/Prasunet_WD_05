@@ -7,8 +7,8 @@ const feelsLike = document.getElementById("feels-like");
 const humidity = document.getElementById("humidity");
 const windSpeed = document.getElementById("wind-speed");
 const forecastDays = document.querySelector(".forecast-days");
-const currentWeatherDiv = document.querySelector(".current-weather");
-const forecastDiv = document.querySelector(".forecast");
+const currentWeatherSection = document.querySelector(".current-weather");
+const forecastSection = document.querySelector(".forecast");
 
 const apiKey = "c461518e8d2ff3d0e97f1a492f964098";
 
@@ -39,7 +39,8 @@ function displayCurrentWeather(data) {
   feelsLike.textContent = `Feels like: ${data.main.feels_like}°C`;
   humidity.textContent = `Humidity: ${data.main.humidity}%`;
   windSpeed.textContent = `Wind speed: ${data.wind.speed} m/s`;
-  currentWeatherDiv.classList.remove("hidden");
+
+  currentWeatherSection.classList.remove("hidden");
 }
 
 function fetchForecastData(location) {
@@ -62,13 +63,38 @@ function displayForecast(forecastData) {
 
   forecastData.forEach((item) => {
     const date = new Date(item.dt * 1000);
-    const dateString = `${date.getDate()}/${date.getMonth() + 1}`;
+    const dateString = `${date.getDate()} ${
+      [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ][date.getMonth()]
+    }`;
+    const dayOfWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ][date.getDay()];
 
     if (!forecastByDay[dateString]) {
       forecastByDay[dateString] = {
         morning: null,
         evening: null,
         night: null,
+        dayOfWeek: dayOfWeek,
       };
     }
 
@@ -84,35 +110,113 @@ function displayForecast(forecastData) {
 
   Object.keys(forecastByDay).forEach((date) => {
     const dayElement = document.createElement("div");
-    const dateElement = document.createElement("p");
+    const dateElement = document.createElement("div");
     const morningElement = document.createElement("div");
+    const morningHeading = document.createElement("h3");
+    const morningList = document.createElement("ul");
     const eveningElement = document.createElement("div");
+    const eveningHeading = document.createElement("h3");
+    const eveningList = document.createElement("ul");
     const nightElement = document.createElement("div");
+    const nightHeading = document.createElement("h3");
+    const nightList = document.createElement("ul");
     const morningIconElement = document.createElement("img");
     const eveningIconElement = document.createElement("img");
     const nightIconElement = document.createElement("img");
 
-    dateElement.textContent = date;
+    const today = new Date();
+    const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
+
+    if (
+      date ===
+      `${today.getDate()} ${
+        [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ][today.getMonth()]
+      }`
+    ) {
+      dateElement.textContent = "Today";
+    } else if (
+      date ===
+      `${tomorrow.getDate()} ${
+        [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ][tomorrow.getMonth()]
+      }`
+    ) {
+      dateElement.textContent = "Tomorrow";
+    } else {
+      dateElement.innerHTML = `<ul> <li> ${forecastByDay[date].dayOfWeek}  </li><li> ${date}  </li>  </ul> `;
+    }
 
     if (forecastByDay[date].morning) {
-      morningElement.textContent = `Morning: ${forecastByDay[date].morning.weather[0].description}, ${forecastByDay[date].morning.main.temp}°C`;
+      morningHeading.textContent = "Morning";
+      const morningListItem1 = document.createElement("li");
+      morningListItem1.textContent =
+        forecastByDay[date].morning.weather[0].description;
+      const morningListItem2 = document.createElement("li");
+      morningListItem2.textContent = `${forecastByDay[date].morning.main.temp}°C`;
       morningIconElement.src = `http://openweathermap.org/img/w/${forecastByDay[date].morning.weather[0].icon}.png`;
+      morningList.appendChild(morningListItem1);
+      morningList.appendChild(morningListItem2);
+      morningElement.appendChild(morningHeading);
+      morningElement.appendChild(morningList);
       morningElement.prepend(morningIconElement);
     } else {
       morningElement.textContent = "Morning: N/A";
     }
 
     if (forecastByDay[date].evening) {
-      eveningElement.textContent = `Evening: ${forecastByDay[date].evening.weather[0].description}, ${forecastByDay[date].evening.main.temp}°C`;
+      eveningHeading.textContent = "Evening";
+      const eveningListItem1 = document.createElement("li");
+      eveningListItem1.textContent =
+        forecastByDay[date].evening.weather[0].description;
+      const eveningListItem2 = document.createElement("li");
+      eveningListItem2.textContent = `${forecastByDay[date].evening.main.temp}°C`;
       eveningIconElement.src = `http://openweathermap.org/img/w/${forecastByDay[date].evening.weather[0].icon}.png`;
+      eveningList.appendChild(eveningListItem1);
+      eveningList.appendChild(eveningListItem2);
+      eveningElement.appendChild(eveningHeading);
+      eveningElement.appendChild(eveningList);
       eveningElement.prepend(eveningIconElement);
     } else {
       eveningElement.textContent = "Evening: N/A";
     }
 
     if (forecastByDay[date].night) {
-      nightElement.textContent = `Night: ${forecastByDay[date].night.weather[0].description}, ${forecastByDay[date].night.main.temp}°C`;
+      nightHeading.textContent = "Night";
+      const nightListItem1 = document.createElement("li");
+      nightListItem1.textContent =
+        forecastByDay[date].night.weather[0].description;
+      const nightListItem2 = document.createElement("li");
+      nightListItem2.textContent = `${forecastByDay[date].night.main.temp}°C`;
       nightIconElement.src = `http://openweathermap.org/img/w/${forecastByDay[date].night.weather[0].icon}.png`;
+      nightList.appendChild(nightListItem1);
+      nightList.appendChild(nightListItem2);
+      nightElement.appendChild(nightHeading);
+      nightElement.appendChild(nightList);
       nightElement.prepend(nightIconElement);
     } else {
       nightElement.textContent = "Night: N/A";
@@ -124,5 +228,6 @@ function displayForecast(forecastData) {
     dayElement.appendChild(nightElement);
     forecastDays.appendChild(dayElement);
   });
-  forecastDiv.classList.remove("hidden");
+
+  forecastSection.classList.remove("hidden");
 }
