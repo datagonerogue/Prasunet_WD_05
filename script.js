@@ -55,22 +55,61 @@ function fetchForecastData(location) {
 function displayForecast(forecastData) {
   forecastDays.innerHTML = "";
 
-  forecastData.forEach((day) => {
+  const forecastByDay = {};
+
+  forecastData.forEach((item) => {
+    const date = new Date(item.dt * 1000);
+    const dateString = `${date.getDate()}/${date.getMonth() + 1}`;
+
+    if (!forecastByDay[dateString]) {
+      forecastByDay[dateString] = {
+        morning: null,
+        evening: null,
+        night: null,
+      };
+    }
+
+    const hour = date.getHours();
+    if (hour >= 6 && hour < 12) {
+      forecastByDay[dateString].morning = item;
+    } else if (hour >= 12 && hour < 18) {
+      forecastByDay[dateString].evening = item;
+    } else {
+      forecastByDay[dateString].night = item;
+    }
+  });
+
+  Object.keys(forecastByDay).forEach((date) => {
     const dayElement = document.createElement("div");
     const dateElement = document.createElement("p");
-    const weatherElement = document.createElement("p");
-    const temperatureElement = document.createElement("p");
+    const morningElement = document.createElement("div");
+    const eveningElement = document.createElement("div");
+    const nightElement = document.createElement("div");
 
-    const date = new Date(day.dt * 1000);
-    const formattedDate = `${date.getDate()}/${date.getMonth() + 1}`;
+    dateElement.textContent = date;
 
-    dateElement.textContent = formattedDate;
-    weatherElement.textContent = day.weather[0].description;
-    temperatureElement.textContent = `${day.main.temp}°C`;
+    if (forecastByDay[date].morning) {
+      morningElement.textContent = `Morning: ${forecastByDay[date].morning.weather[0].description}, ${forecastByDay[date].morning.main.temp}°C`;
+    } else {
+      morningElement.textContent = "Morning: N/A";
+    }
+
+    if (forecastByDay[date].evening) {
+      eveningElement.textContent = `Evening: ${forecastByDay[date].evening.weather[0].description}, ${forecastByDay[date].evening.main.temp}°C`;
+    } else {
+      eveningElement.textContent = "Evening: N/A";
+    }
+
+    if (forecastByDay[date].night) {
+      nightElement.textContent = `Night: ${forecastByDay[date].night.weather[0].description}, ${forecastByDay[date].night.main.temp}°C`;
+    } else {
+      nightElement.textContent = "Night: N/A";
+    }
 
     dayElement.appendChild(dateElement);
-    dayElement.appendChild(weatherElement);
-    dayElement.appendChild(temperatureElement);
+    dayElement.appendChild(morningElement);
+    dayElement.appendChild(eveningElement);
+    dayElement.appendChild(nightElement);
     forecastDays.appendChild(dayElement);
   });
 }
