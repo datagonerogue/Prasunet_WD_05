@@ -66,11 +66,14 @@ header {
 
 .current-weather {
   background-color: #474f7a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  text-align: center;
   margin-bottom: 20px;
+  width: 500px;
 }
 
 .current-weather.hidden,
@@ -79,10 +82,15 @@ header {
 }
 .current-weather h2 {
   font-size: 36px;
+  text-align: center;
+
   margin-bottom: 10px;
 }
-
+.weather-content {
+  margin-left: 10%;
+}
 .current-weather p {
+  text-align: right;
   margin-bottom: 5px;
 }
 
