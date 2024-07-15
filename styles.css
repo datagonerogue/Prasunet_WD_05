@@ -98,7 +98,6 @@ ul {
   padding: 20px 0px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 5);
-
   text-align: center;
   width: 60%;
 }
@@ -110,16 +109,18 @@ ul {
 
 .forecast-days {
   display: flex;
+
   flex-direction: column;
   justify-content: center;
-
+  padding: 30px;
   align-items: center;
 }
 
 .forecast-days > div {
   background-color: #474f7a;
   padding: 10px;
-  width: 600px;
+
+  width: 100%;
   border-radius: 5px;
   margin: 10px;
   display: flex;
