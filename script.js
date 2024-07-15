@@ -17,6 +17,12 @@ searchBtn.addEventListener("click", () => {
   fetchWeatherData(location);
 });
 
+locationInput.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") {
+    const location = locationInput.value;
+    fetchWeatherData(location);
+  }
+});
 function fetchWeatherData(location) {
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`;
 
