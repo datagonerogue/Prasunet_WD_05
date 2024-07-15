@@ -10,8 +10,8 @@ body {
   font-family: Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  color: #ffd0ec;
-  background-color: #81689d;
+  color: #fff5e1;
+  background-color: #fff5e1;
 }
 img {
   width: 60px;
@@ -23,10 +23,8 @@ a {
 /* Header styles */
 header {
   background-color: #1f2544;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
-  margin: 20px;
-  border-radius: 12px;
 }
 ul {
   list-style-type: none;
@@ -35,17 +33,17 @@ ul {
 .search-container {
   display: flex;
   justify-content: center;
-  margin: 40px 0;
+  margin: 30px 0;
 }
 
 #location-input {
   padding: 10px;
   border: 2px solid #ffd0ec;
-  border-radius: 12px;
+  border-radius: 5px;
   color: #ffd0ec;
   background-color: #ffffff00;
-  font-size: 16px;
-  width: 300px;
+  font-size: 20px;
+  width: 30%;
   margin-right: 10px;
 }
 
@@ -53,9 +51,10 @@ ul {
   background-color: #474f7a;
   border: none;
   color: #ffd0ec;
+  border: 2px solid #ffd0ec;
 
   padding: 10px 20px;
-  border-radius: 12px;
+  border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
 }
@@ -69,15 +68,15 @@ ul {
 }
 
 .current-weather {
-  background-color: #474f7a;
+  background-color: #0c1844;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  width: 500px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  margin: 100px 0px;
+  width: 30%;
 }
 
 .current-weather.hidden,
@@ -87,45 +86,46 @@ ul {
 .current-weather h2 {
   font-size: 36px;
   text-align: center;
+}
 
-  margin-bottom: 10px;
-}
-.weather-content {
-  margin-left: 10%;
-}
 .current-weather p {
   text-align: right;
   margin-bottom: 5px;
 }
 
 .forecast {
-  background-color: #1f2544;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #0c1844;
+  padding: 20px 0px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 5);
+
   text-align: center;
-  width: 100%;
+  width: 60%;
 }
 
 .forecast h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 36px;
+  margin-bottom: 10px;
 }
 
 .forecast-days {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  align-items: center;
 }
 
 .forecast-days > div {
   background-color: #474f7a;
   padding: 10px;
-  border-radius: 12px;
+  width: 600px;
+  border-radius: 5px;
   margin: 10px;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 5);
 }
 .forecast-days > div > div {
   display: flex;
