@@ -29,6 +29,10 @@ header {
 ul {
   list-style-type: none;
 }
+
+h1 {
+  font-size: 4rem;
+}
 /* Search container styles */
 .search-container {
   display: flex;
@@ -49,7 +53,6 @@ ul {
 
 #search-btn {
   background-color: #474f7a;
-  border: none;
   color: #ffd0ec;
   border: 2px solid #ffd0ec;
 
@@ -57,8 +60,13 @@ ul {
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
+  transition: color 0.3s, background-color 0.3s, border 0.3s;
 }
-
+#search-btn:hover {
+  background-color: #ffd0ec;
+  color: #474f7a;
+  border: 2px solid #474f7a;
+}
 /* Weather info styles */
 .weather-info {
   display: flex;
@@ -77,6 +85,11 @@ ul {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
   margin: 100px 0px;
   width: 30%;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.current-weather:hover {
+  transform: translateY(5px) translateX(5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
 }
 
 .current-weather.hidden,
@@ -103,7 +116,7 @@ ul {
 }
 
 .forecast h2 {
-  font-size: 36px;
+  font-size: 2rem;
   margin-bottom: 10px;
 }
 
