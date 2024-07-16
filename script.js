@@ -177,7 +177,7 @@ function displayForecast(forecastData) {
 
   Object.keys(forecastByDay).forEach((date) => {
     const dayElement = document.createElement("div");
-    const dateElement = document.createElement("div");
+    const dateElement = document.createElement("h3");
     const morningElement = document.createElement("div");
     const morningHeading = document.createElement("h3");
     const morningList = document.createElement("ul");
