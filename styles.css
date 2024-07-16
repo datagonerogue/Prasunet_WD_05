@@ -8,7 +8,7 @@
 /* Global styles */
 body {
   font-family: Arial, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.5;
   color: #fff5e1;
   background-color: #fff5e1;
@@ -69,9 +69,6 @@ h1 {
 }
 /* Weather info styles */
 .weather-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: 20px;
 }
 
@@ -81,15 +78,11 @@ h1 {
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 5px;
+
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
-  margin: 100px 0px;
+  margin: 100px auto;
   width: 30%;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.current-weather:hover {
-  transform: translateY(5px) translateX(5px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
 }
 
 .current-weather.hidden,
@@ -112,7 +105,8 @@ h1 {
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 5);
   text-align: center;
-  width: 60%;
+  width: 80%;
+  margin: 0px auto;
 }
 
 .forecast h2 {
@@ -145,7 +139,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100px;
+  width: 150px;
 }
 
 /* Footer styles */
@@ -156,4 +150,55 @@ footer {
   text-align: center;
   display: none;
   bottom: 0;
+}
+
+@media (max-width: 1080px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  .current-weather {
+    flex-direction: column;
+    width: 45%;
+  }
+  .weather-info {
+    margin: 0px;
+  }
+  .weather-info h2 {
+    margin-bottom: 20px;
+  }
+  .current-weather p {
+    text-align: left;
+  }
+
+  .forecast {
+    width: 70%;
+  }
+  .forecast-days > div {
+    flex-direction: column;
+    width: 80%;
+  }
+  .forecast-days > div > div {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 540px) {
+  .current-weather {
+    flex-direction: column;
+    width: 90%;
+    margin: 20px auto;
+  }
+  .forecast {
+    width: 90%;
+  }
+  .forecast-days {
+    padding: 10px;
+  }
+  .forecast-days > div {
+    flex-direction: column;
+    width: 90%;
+  }
+  .forecast-days > div > div {
+    margin-bottom: 40px;
+  }
 }
