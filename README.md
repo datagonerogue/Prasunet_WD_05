@@ -1,8 +1,8 @@
-## Weather App
+## Weatherfinder
 
 ### Description
 
-The Weather App is a web application that allows users to view the current weather conditions, temperature, and other relevant information for their location or a user-inputted location. The app fetches weather data from a weather API and displays the information on a user-friendly interface.
+The Weatherfinder is a web application that allows users to view the current weather conditions, temperature, and other relevant information for their location or a user-inputted location. The app fetches weather data from a weather API and displays the information on a user-friendly interface.
 
 You can view the live site at: https://weather.mikoshi.in/
 
