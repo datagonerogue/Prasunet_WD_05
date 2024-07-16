@@ -1,5 +1,6 @@
 const locationInput = document.getElementById("location-input");
 const searchBtn = document.getElementById("search-btn");
+const getLocationBtn = document.getElementById("get-location-btn");
 const cityName = document.getElementById("city-name");
 const weatherDescription = document.getElementById("weather-description");
 const temperature = document.getElementById("temperature");
@@ -15,6 +16,24 @@ const apiKey = "c461518e8d2ff3d0e97f1a492f964098";
 searchBtn.addEventListener("click", () => {
   const location = locationInput.value;
   fetchWeatherData(location);
+});
+
+getLocationBtn.addEventListener("click", () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        fetchWeatherDataByCoordinates(latitude, longitude);
+      },
+      (error) => {
+        console.error("Error getting location:", error);
+        alert("Error getting your location. Please try again later.");
+      }
+    );
+  } else {
+    alert("Geolocation is not supported by this browser.");
+  }
 });
 
 locationInput.addEventListener("keyup", (event) => {
@@ -35,6 +54,32 @@ function fetchWeatherData(location) {
     .catch((error) => {
       console.error("Error fetching weather data:", error);
       alert("Error fetching weather data. Please try again later.");
+    });
+}
+function fetchWeatherDataByCoordinates(latitude, longitude) {
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      displayCurrentWeather(data);
+      fetchForecastDataByCoordinates(latitude, longitude);
+    })
+    .catch((error) => {
+      console.error("Error fetching weather data:", error);
+      alert("Error fetching weather data. Please try again later.");
+    });
+}
+function fetchForecastDataByCoordinates(latitude, longitude) {
+  const forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
+  fetch(forecastApiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      displayForecast(data.list);
+    })
+    .catch((error) => {
+      console.error("Error fetching forecast data:", error);
     });
 }
 
