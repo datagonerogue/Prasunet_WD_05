@@ -84,6 +84,7 @@ function fetchWeatherDataByCoordinates(latitude, longitude) {
     .catch((error) => {
       console.error("Error fetching weather data:", error);
       alert("Error fetching weather data. Please try again later.");
+      hideLoadingSpinner();
     });
 }
 function fetchForecastDataByCoordinates(latitude, longitude) {
@@ -96,6 +97,7 @@ function fetchForecastDataByCoordinates(latitude, longitude) {
     })
     .catch((error) => {
       console.error("Error fetching forecast data:", error);
+      hideLoadingSpinner();
     });
 }
 
@@ -120,6 +122,7 @@ function fetchForecastData(location) {
     })
     .catch((error) => {
       console.error("Error fetching forecast data:", error);
+      hideLoadingSpinner();
     });
 }
 
