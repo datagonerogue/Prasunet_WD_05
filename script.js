@@ -15,7 +15,6 @@ const apiKey = "c461518e8d2ff3d0e97f1a492f964098";
 
 searchBtn.addEventListener("click", () => {
   const location = locationInput.value;
-  showLoadingSpinner();
   fetchWeatherData(location);
 });
 
@@ -25,30 +24,17 @@ getLocationBtn.addEventListener("click", () => {
       (position) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-        showLoadingSpinner();
         fetchWeatherDataByCoordinates(latitude, longitude);
       },
       (error) => {
         console.error("Error getting location:", error);
         alert("Error getting your location. Please try again later.");
-        hideLoadingSpinner();
       }
     );
   } else {
     alert("Geolocation is not supported by this browser.");
-    hideLoadingSpinner();
   }
 });
-
-function showLoadingSpinner() {
-  const loadingSpinner = document.querySelector(".loading-spinner");
-  loadingSpinner.classList.remove("hidden");
-}
-
-function hideLoadingSpinner() {
-  const loadingSpinner = document.querySelector(".loading-spinner");
-  loadingSpinner.classList.add("hidden");
-}
 
 locationInput.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
@@ -64,12 +50,10 @@ function fetchWeatherData(location) {
     .then((data) => {
       displayCurrentWeather(data);
       fetchForecastData(location);
-      hideLoadingSpinner();
     })
     .catch((error) => {
       console.error("Error fetching weather data:", error);
       alert("Error fetching weather data. Please try again later.");
-      hideLoadingSpinner();
     });
 }
 function fetchWeatherDataByCoordinates(latitude, longitude) {
@@ -84,7 +68,6 @@ function fetchWeatherDataByCoordinates(latitude, longitude) {
     .catch((error) => {
       console.error("Error fetching weather data:", error);
       alert("Error fetching weather data. Please try again later.");
-      hideLoadingSpinner();
     });
 }
 function fetchForecastDataByCoordinates(latitude, longitude) {
@@ -97,7 +80,6 @@ function fetchForecastDataByCoordinates(latitude, longitude) {
     })
     .catch((error) => {
       console.error("Error fetching forecast data:", error);
-      hideLoadingSpinner();
     });
 }
 
@@ -122,13 +104,11 @@ function fetchForecastData(location) {
     })
     .catch((error) => {
       console.error("Error fetching forecast data:", error);
-      hideLoadingSpinner();
     });
 }
 
 function displayForecast(forecastData) {
   forecastDays.innerHTML = "";
-  hideLoadingSpinner();
 
   const forecastByDay = {};
 
