@@ -128,6 +128,7 @@ function fetchForecastData(location) {
 
 function displayForecast(forecastData) {
   forecastDays.innerHTML = "";
+  hideLoadingSpinner();
 
   const forecastByDay = {};
 
